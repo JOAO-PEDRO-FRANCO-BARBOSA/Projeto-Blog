@@ -23,6 +23,17 @@ export default function Layout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-T3PSM5LKQ3" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-T3PSM5LKQ3');
+            `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
