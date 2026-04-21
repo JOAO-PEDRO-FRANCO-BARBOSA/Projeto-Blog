@@ -1,0 +1,43 @@
+{
+  "articles": [
+    {
+      "id": "1",
+      "title": "VS Code: 15 Extensões Essenciais para Programadores Iniciantes",
+      "slug": "vs-code-15-extensoes-essenciais",
+      "category": "Programação",
+      "author": "Zentrix",
+      "excerpt": "Descubra as 15 extensões mais úteis do VS Code que todo programador iniciante deveria usar para aumentar sua produtividade.",
+      "image": "/images/article-1.jpg",
+      "published": true,
+      "createdAt": "2025-04-21",
+      "keywords": ["VS Code", "extensões", "programação", "iniciante"],
+      "readTime": 7
+    },
+    {
+      "id": "2",
+      "title": "10 Ferramentas de IA Gratuitas para Aumentar sua Produtividade em 2025",
+      "slug": "10-ferramentas-ia-gratuitas-2025",
+      "category": "Inteligência Artificial",
+      "author": "Zentrix",
+      "excerpt": "Explore 10 ferramentas de IA que você pode usar gratuitamente para melhorar sua produtividade como dev ou criador de conteúdo.",
+      "image": "/images/article-2.jpg",
+      "published": true,
+      "createdAt": "2025-04-20",
+      "keywords": ["IA", "ferramentas", "gratuitas", "produtividade", "2025"],
+      "readTime": 8
+    },
+    {
+      "id": "3",
+      "title": "Como Ganhar Dinheiro com ChatGPT: 7 Métodos Comprovados em 2025",
+      "slug": "ganhar-dinheiro-chatgpt-7-metodos",
+      "category": "Inteligência Artificial",
+      "author": "Zentrix",
+      "excerpt": "Descubra 7 formas práticas e comprovadas de ganhar dinheiro usando ChatGPT em 2025.",
+      "image": "/images/article-3.jpg",
+      "published": true,
+      "createdAt": "2025-04-19",
+      "keywords": ["ChatGPT", "ganhar dinheiro", "IA", "renda", "2025"],
+      "readTime": 10
+    }
+  ]
+}

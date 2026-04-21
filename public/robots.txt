@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zentr1xa.com/sitemap.xml
+
+Disallow: /admin
+Disallow: /api
