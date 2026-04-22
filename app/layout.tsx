@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
 import { RootLayout } from '@/components/RootLayout';
 import './globals.css';
 
@@ -37,21 +36,18 @@ export default function Layout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              try {
-                if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
-              } catch (e) {}
+              // Structural fix: remove manual toggle/localStorage and follow OS preference only.
+              if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
             `,
           }}
         />
       </head>
       <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <RootLayout>{children}</RootLayout>
-        </ThemeProvider>
+        <RootLayout>{children}</RootLayout>
       </body>
     </html>
   );

@@ -2,15 +2,40 @@
 
 import { useState } from 'react';
 
+type NewsletterResponse = {
+  message?: string;
+  error?: string;
+};
+
+type Feedback = {
+  type: 'success' | 'error';
+  text: string;
+};
+
 export function NewsletterForm() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
+
+  const parseResponseSafely = async (response: Response): Promise<NewsletterResponse> => {
+    // Structural fix: handle empty/non-JSON responses without throwing in the UI.
+    const rawText = await response.text();
+
+    if (!rawText) {
+      return {};
+    }
+
+    try {
+      return JSON.parse(rawText) as NewsletterResponse;
+    } catch {
+      return {};
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setMessage('');
+    setFeedback(null);
 
     try {
       const response = await fetch('/api/newsletter', {
@@ -19,17 +44,25 @@ export function NewsletterForm() {
         body: JSON.stringify({ email }),
       });
 
-      const payload = await response.json();
+      const payload = await parseResponseSafely(response);
 
       if (response.ok) {
-        setMessage(payload?.message || 'Email adicionado com sucesso!');
+        setFeedback({
+          type: 'success',
+          text: payload.message || 'Email adicionado com sucesso!',
+        });
         setEmail('');
-        setTimeout(() => setMessage(''), 3000);
       } else {
-        setMessage(payload?.error || 'Erro ao adicionar email.');
+        setFeedback({
+          type: 'error',
+          text: payload.error || `Erro ao adicionar email (status ${response.status}).`,
+        });
       }
     } catch {
-      setMessage('Erro ao adicionar email.');
+      setFeedback({
+        type: 'error',
+        text: 'Falha de rede. Verifique sua conexão e tente novamente.',
+      });
     } finally {
       setLoading(false);
     }
@@ -42,7 +75,12 @@ export function NewsletterForm() {
           type="email"
           placeholder="seu@email.com"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (feedback) {
+              setFeedback(null);
+            }
+          }}
           required
           className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
@@ -54,9 +92,9 @@ export function NewsletterForm() {
           {loading ? 'Enviando...' : 'Inscrever'}
         </button>
       </div>
-      {message && (
-        <p className={`text-sm ${message.includes('sucesso') ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-          {message}
+      {feedback && (
+        <p className={`text-sm ${feedback.type === 'success' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+          {feedback.text}
         </p>
       )}
     </form>
