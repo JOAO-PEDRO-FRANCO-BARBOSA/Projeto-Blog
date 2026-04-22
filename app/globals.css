@@ -4,6 +4,10 @@
   scroll-behavior: smooth;
 }
 
+html {
+  background: #030712;
+}
+
 body {
   @apply transition-colors;
 }
@@ -67,7 +71,7 @@ body {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #030712;
+  color: #f9fafb;
   font-family: Arial, Helvetica, sans-serif;
 }

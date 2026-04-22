@@ -15,7 +15,7 @@ export function ArticleCard({ post, featured = false }: ArticleCardProps) {
     return (
       <article className="group">
         <Link href={`/blog/${post.slug}`} className="block overflow-hidden rounded-lg">
-          <div className="relative h-80 w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
+          <div className="relative h-80 w-full overflow-hidden bg-gray-800">
             <SafeImage
               src={post.image || '/images/fallback-placeholder.svg'}
               fallbackSrc="/images/fallback-placeholder.svg"
@@ -46,9 +46,9 @@ export function ArticleCard({ post, featured = false }: ArticleCardProps) {
   }
 
   return (
-    <article className="group overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:shadow-lg transition">
+    <article className="group overflow-hidden rounded-lg border border-gray-800 bg-gray-900 hover:shadow-lg transition">
       <Link href={`/blog/${post.slug}`} className="block overflow-hidden">
-        <div className="relative h-48 w-full bg-gray-200 dark:bg-gray-800">
+        <div className="relative h-48 w-full bg-gray-800">
           <SafeImage
             src={post.image || '/images/fallback-placeholder.svg'}
             fallbackSrc="/images/fallback-placeholder.svg"

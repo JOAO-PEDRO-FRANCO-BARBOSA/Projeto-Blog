@@ -63,7 +63,7 @@ export default async function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+      <section className="bg-gray-950 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">Explore por categoria</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -71,7 +71,7 @@ export default async function Home() {
               <Link
                 key={cat.id}
                 href={`/blog?category=${cat.slug}`}
-                className="p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-700 transition"
+                className="p-6 rounded-lg border border-gray-800 bg-gray-900 hover:shadow-lg hover:border-blue-700 transition"
               >
                 <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">{cat.name}</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">{cat.description || 'Conteúdos selecionados para acelerar resultados.'}</p>

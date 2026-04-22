@@ -12,7 +12,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   if (!items.length) return null;
 
   return (
-    <nav className="rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-4">
+    <nav className="rounded-lg border border-gray-800 bg-gray-900 p-4">
       <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Índice</h3>
       <ul className="space-y-2 text-sm">
         {items.map((item) => (

@@ -58,21 +58,21 @@ export function CommentsSection({ postId, initialComments }: CommentsSectionProp
   };
 
   return (
-    <section className="border-t border-gray-200 bg-gray-50 py-12 dark:border-gray-800 dark:bg-gray-900">
+    <section className="border-t border-gray-800 bg-gray-950 py-12">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <h2 className="mb-8 text-2xl font-bold text-slate-900 dark:text-slate-100">Comentários</h2>
 
-        <div className="space-y-4 rounded-lg border border-gray-300 bg-white p-6 dark:border-gray-700 dark:bg-gray-950">
+        <div className="space-y-4 rounded-lg border border-gray-800 bg-gray-900 p-6">
           {comments.length === 0 ? (
-            <p className="text-gray-600 dark:text-gray-400">Ainda não há comentários publicados.</p>
+            <p className="text-gray-400">Ainda não há comentários publicados.</p>
           ) : (
             comments.map((comment) => (
-              <article key={comment.id} className="border-b border-gray-200 pb-4 last:border-b-0 dark:border-gray-800">
+              <article key={comment.id} className="border-b border-gray-800 pb-4 last:border-b-0">
                 <div className="mb-2 flex items-center justify-between gap-2">
-                  <strong className="text-slate-900 dark:text-slate-100">{comment.name}</strong>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{formatDate(comment.created_at)}</span>
+                  <strong className="text-slate-100">{comment.name}</strong>
+                  <span className="text-xs text-gray-400">{formatDate(comment.created_at)}</span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">{comment.content}</p>
+                <p className="text-gray-300">{comment.content}</p>
               </article>
             ))
           )}
@@ -80,9 +80,9 @@ export function CommentsSection({ postId, initialComments }: CommentsSectionProp
 
         <form
           onSubmit={handleSubmit}
-          className="mt-8 space-y-4 rounded-lg border border-gray-300 bg-white p-6 dark:border-gray-700 dark:bg-gray-950"
+          className="mt-8 space-y-4 rounded-lg border border-gray-800 bg-gray-900 p-6"
         >
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Deixe um comentário</h3>
+          <h3 className="text-lg font-semibold text-slate-100">Deixe um comentário</h3>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <input
@@ -91,7 +91,7 @@ export function CommentsSection({ postId, initialComments }: CommentsSectionProp
               value={name}
               onChange={(event) => setName(event.target.value)}
               required
-              className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-slate-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-slate-100 dark:placeholder-gray-400"
+              className="rounded-lg border border-gray-700 bg-gray-950 px-4 py-2 text-slate-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="email"
@@ -99,7 +99,7 @@ export function CommentsSection({ postId, initialComments }: CommentsSectionProp
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
-              className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-slate-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-slate-100 dark:placeholder-gray-400"
+              className="rounded-lg border border-gray-700 bg-gray-950 px-4 py-2 text-slate-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -109,7 +109,7 @@ export function CommentsSection({ postId, initialComments }: CommentsSectionProp
             onChange={(event) => setContent(event.target.value)}
             required
             rows={4}
-            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-slate-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-slate-100 dark:placeholder-gray-400"
+            className="w-full rounded-lg border border-gray-700 bg-gray-950 px-4 py-2 text-slate-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           <button

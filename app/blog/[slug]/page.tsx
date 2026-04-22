@@ -31,7 +31,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article>
-      <header className="border-b border-gray-200 bg-gray-50 py-12 dark:border-gray-800 dark:bg-gray-900">
+      <header className="border-b border-gray-800 bg-gray-950 py-12">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/blog"
@@ -72,15 +72,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {post.content}
         </div>
 
-        <div className="mt-12 rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-950">
-          <h2 className="mb-4 text-xl font-bold text-slate-900 dark:text-slate-100">Receba novos conteúdos por e-mail</h2>
+        <div className="mt-12 rounded-xl border border-gray-800 bg-gray-900 p-6">
+          <h2 className="mb-4 text-xl font-bold text-slate-100">Receba novos conteúdos por e-mail</h2>
           <NewsletterForm />
         </div>
       </section>
 
       {relatedPosts.length > 0 && (
         <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold text-slate-900 dark:text-slate-100">Artigos relacionados</h2>
+          <h2 className="mb-8 text-2xl font-bold text-slate-100">Artigos relacionados</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {relatedPosts.map((related) => (
               <ArticleCard key={related.id} post={related} />

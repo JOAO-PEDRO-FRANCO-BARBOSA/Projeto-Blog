@@ -23,7 +23,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <div>
-      <div className="bg-gray-50 dark:bg-gray-900 py-12">
+      <div className="bg-gray-950 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Todos os artigos</h1>
           <p className="text-gray-600 dark:text-gray-400">

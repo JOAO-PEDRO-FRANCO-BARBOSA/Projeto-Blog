@@ -46,7 +46,7 @@ export default function ToolsPage() {
 
   return (
     <div>
-      <div className="bg-gray-50 dark:bg-gray-900 py-12">
+      <div className="bg-gray-950 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Ferramentas Recomendadas</h1>
           <p className="text-gray-600 dark:text-gray-400">
@@ -60,17 +60,17 @@ export default function ToolsPage() {
           {tools.map((tool, idx) => (
             <div
               key={idx}
-              className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-6 hover:shadow-lg transition"
+              className="rounded-lg border border-gray-800 bg-gray-900 p-6 hover:shadow-lg transition"
             >
               <div className="flex items-start justify-between mb-3">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">{tool.name}</h3>
-                <span className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded">
+                <h3 className="text-lg font-bold text-white">{tool.name}</h3>
+                <span className="px-2 py-1 text-xs font-medium bg-blue-950 text-blue-300 rounded">
                   {tool.category}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{tool.description}</p>
+              <p className="text-sm text-gray-400 mb-4">{tool.description}</p>
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-gray-900 dark:text-white">{tool.price}</span>
+                <span className="font-semibold text-white">{tool.price}</span>
                 <a
                   href={tool.link}
                   target="_blank"
