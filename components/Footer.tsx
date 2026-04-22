@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* About */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Zentrixa</h3>
+            <h3 className="font-bold text-lg mb-4 text-white">Zentrixa</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
               Conteúdo sobre IA, ferramentas digitais e produtividade para devs, criadores e empreendedores.
             </p>
@@ -16,7 +16,7 @@ export function Footer() {
 
           {/* Categories */}
           <div>
-            <h4 className="font-semibold mb-4">Categorias</h4>
+            <h4 className="font-semibold mb-4 text-white">Categorias</h4>
             <ul className="space-y-2">
               {Object.entries(CATEGORIES).map(([key, cat]) => (
                 <li key={key}>
@@ -33,7 +33,7 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold mb-4">Links</h4>
+            <h4 className="font-semibold mb-4 text-white">Links</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/sobre" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition text-sm">
@@ -55,7 +55,7 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <h4 className="font-semibold mb-4">Siga-nos</h4>
+            <h4 className="font-semibold mb-4 text-white">Siga-nos</h4>
             <div className="flex gap-4">
               <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition">
                 Twitter

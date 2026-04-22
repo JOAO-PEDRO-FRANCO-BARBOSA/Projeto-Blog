@@ -7,7 +7,27 @@ function normalizeSupabaseUrl(url: string): string {
 const supabaseUrl = normalizeSupabaseUrl(process.env.NEXT_PUBLIC_SUPABASE_URL || '');
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
+export const ADMIN_ACCESS_TOKEN_COOKIE = 'zentr1xa-admin-access-token';
+export const ADMIN_REFRESH_TOKEN_COOKIE = 'zentr1xa-admin-refresh-token';
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+export function createSupabaseClientWithToken(accessToken?: string) {
+  return createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+      persistSession: false,
+    },
+    global: accessToken
+      ? {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      : undefined,
+  });
+}
 
 export type Category = {
   id: string; // UUID
