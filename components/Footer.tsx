@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* About */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Zentrix</h3>
+            <h3 className="font-bold text-lg mb-4">Zentrixa</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
               Conteúdo sobre IA, ferramentas digitais e produtividade para devs, criadores e empreendedores.
             </p>
@@ -69,7 +69,7 @@ export function Footer() {
 
         <div className="mt-8 border-t border-gray-200 dark:border-gray-800 pt-8">
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-            © 2026 Zentrix. Todos os direitos reservados.
+            © 2026 Zentrixa. Todos os direitos reservados.
           </p>
         </div>
       </div>

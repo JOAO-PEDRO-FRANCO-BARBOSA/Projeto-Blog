@@ -4,14 +4,14 @@ import { RootLayout } from '@/components/RootLayout';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Zentrix | Tecnologia, IA e Produtividade',
+  title: 'Zentrixa | Tecnologia, IA e Produtividade',
   description: 'Conteúdo sobre IA, ferramentas digitais e produtividade para devs, criadores e empreendedores.',
   metadataBase: new URL('https://zentr1xa.com'),
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
     url: 'https://zentr1xa.com',
-    siteName: 'Zentrix',
+    siteName: 'Zentrixa',
   },
 };
 

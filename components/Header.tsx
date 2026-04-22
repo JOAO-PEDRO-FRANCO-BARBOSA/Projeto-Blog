@@ -16,9 +16,9 @@ export function Header() {
             src="/Zentrixa_Logo.png"
             fallbackSrc="/images/fallback-placeholder.svg"
             alt="Zentrixa"
-            width={170}
-            height={40}
-            className="h-9 w-auto sm:h-10"
+            width={320}
+            height={96}
+            className="h-14 w-auto sm:h-16 lg:h-20"
             priority
           />
         </Link>

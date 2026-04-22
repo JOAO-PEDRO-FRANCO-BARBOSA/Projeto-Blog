@@ -1,8 +1,8 @@
 export const SEO_CONFIG = {
-  siteName: 'Zentrix',
+  siteName: 'Zentrixa',
   siteUrl: 'https://zentr1xa.com',
   description: 'Conteúdo sobre IA, ferramentas digitais e produtividade para devs, criadores e empreendedores.',
-  author: 'Zentrix',
+  author: 'Zentrixa',
   twitterHandle: '@zentr1xa',
   locale: 'pt-BR',
   logo: '/logo.svg',

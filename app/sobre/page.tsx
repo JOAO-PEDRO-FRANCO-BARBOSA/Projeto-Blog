@@ -2,11 +2,11 @@ export default function AboutPage() {
   return (
     <div>
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-8">Sobre o Zentrix</h1>
+        <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-8">Sobre o Zentrixa</h1>
 
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
-            O Zentrix nasceu para descomplicar tecnologia. Nossa missão é entregar conteúdo prático, honesto e direto ao ponto sobre <strong>inteligência artificial, ferramentas digitais e produtividade</strong> para criadores e devs.
+            O Zentrixa nasceu para descomplicar tecnologia. Nossa missão é entregar conteúdo prático, honesto e direto ao ponto sobre <strong>inteligência artificial, ferramentas digitais e produtividade</strong> para criadores e devs.
           </p>
 
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-12 mb-6">Para quem escrevemos</h2>
