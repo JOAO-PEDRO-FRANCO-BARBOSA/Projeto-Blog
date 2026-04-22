@@ -1,25 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { getPostBySlug } from '@/lib/db';
 
-// Mock para buscar post por slug
 export async function GET(
-  request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const { slug } = await params;
 
-    // Mock data
-    const mockPosts: Record<string, any> = {
-      'vs-code-15-extensoes-essenciais': {
-        id: '1',
-        title: 'VS Code: 15 Extensões Essenciais para Programadores Iniciantes',
-        slug: 'vs-code-15-extensoes-essenciais',
-        content: 'Conteúdo do artigo...',
-        author: 'Zentrix',
-      },
-    };
-
-    const post = mockPosts[slug];
+    const result = await getPostBySlug(slug);
+    const post = result.data;
 
     if (!post) {
       return NextResponse.json(
@@ -29,7 +18,7 @@ export async function GET(
     }
 
     return NextResponse.json(post);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Erro ao buscar post' },
       { status: 500 }

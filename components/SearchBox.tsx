@@ -14,6 +14,7 @@ export function SearchBox() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSearch = useCallback(async (searchQuery: string) => {
     setQuery(searchQuery);
@@ -21,6 +22,7 @@ export function SearchBox() {
     if (searchQuery.length < 2) {
       setResults([]);
       setIsOpen(false);
+      setError(null);
       return;
     }
 
@@ -29,10 +31,19 @@ export function SearchBox() {
       if (response.ok) {
         const data = await response.json();
         setResults(data);
+        setError(null);
         setIsOpen(true);
+      } else {
+        const payload = await response.json();
+        setError(payload?.error || 'Erro ao buscar artigos.');
+        setResults([]);
+        setIsOpen(false);
       }
-    } catch (error) {
-      console.error('Search error:', error);
+    } catch (requestError) {
+      console.error('Search error:', requestError);
+      setError('Falha de conexão ao buscar artigos.');
+      setResults([]);
+      setIsOpen(false);
     }
   }, []);
 
@@ -68,6 +79,8 @@ export function SearchBox() {
           ))}
         </div>
       )}
+
+      {error && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
     </div>
   );
 }

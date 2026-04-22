@@ -2,30 +2,35 @@
 
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useState, useEffect } from 'react';
+import { SafeImage } from '@/components/SafeImage';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-gray-800 dark:bg-gray-950/95">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-2xl">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            Zentrix
-          </span>
+        <Link href="/" className="flex items-center" aria-label="Zentrixa Home">
+          <SafeImage
+            src="/Zentrixa_Logo.png"
+            fallbackSrc="/images/fallback-placeholder.svg"
+            alt="Zentrixa"
+            width={170}
+            height={40}
+            className="h-9 w-auto sm:h-10"
+            priority
+          />
         </Link>
 
         {/* Menu */}
         <div className="hidden md:flex items-center gap-8">
+          <Link
+            href="/"
+            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition"
+          >
+            Home
+          </Link>
           <Link
             href="/blog"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition"

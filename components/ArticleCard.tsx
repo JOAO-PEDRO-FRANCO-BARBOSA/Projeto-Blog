@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { formatDate, readingTime } from '@/lib/utils';
 import { Post } from '@/lib/db';
+import { SafeImage } from '@/components/SafeImage';
 
 interface ArticleCardProps {
   post: Post;
@@ -16,8 +16,9 @@ export function ArticleCard({ post, featured = false }: ArticleCardProps) {
       <article className="group">
         <Link href={`/blog/${post.slug}`} className="block overflow-hidden rounded-lg">
           <div className="relative h-80 w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
-            <Image
-              src={post.image || '/images/placeholder.jpg'}
+            <SafeImage
+              src={post.image || '/images/fallback-placeholder.svg'}
+              fallbackSrc="/images/fallback-placeholder.svg"
               alt={post.title}
               fill
               className="object-cover transition duration-300 group-hover:scale-105"
@@ -48,8 +49,9 @@ export function ArticleCard({ post, featured = false }: ArticleCardProps) {
     <article className="group overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:shadow-lg transition">
       <Link href={`/blog/${post.slug}`} className="block overflow-hidden">
         <div className="relative h-48 w-full bg-gray-200 dark:bg-gray-800">
-          <Image
-            src={post.image || '/images/placeholder.jpg'}
+          <SafeImage
+            src={post.image || '/images/fallback-placeholder.svg'}
+            fallbackSrc="/images/fallback-placeholder.svg"
             alt={post.title}
             fill
             className="object-cover transition duration-300 group-hover:scale-105"

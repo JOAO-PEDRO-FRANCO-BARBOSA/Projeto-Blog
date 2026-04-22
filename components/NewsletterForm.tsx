@@ -10,6 +10,7 @@ export function NewsletterForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setMessage('');
 
     try {
       const response = await fetch('/api/newsletter', {
@@ -18,14 +19,16 @@ export function NewsletterForm() {
         body: JSON.stringify({ email }),
       });
 
+      const payload = await response.json();
+
       if (response.ok) {
-        setMessage('Email adicionado com sucesso! 🎉');
+        setMessage(payload?.message || 'Email adicionado com sucesso!');
         setEmail('');
         setTimeout(() => setMessage(''), 3000);
       } else {
-        setMessage('Erro ao adicionar email.');
+        setMessage(payload?.error || 'Erro ao adicionar email.');
       }
-    } catch (error) {
+    } catch {
       setMessage('Erro ao adicionar email.');
     } finally {
       setLoading(false);

@@ -1,25 +1,66 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createComment, getApprovedComments } from '@/lib/db';
 
-// Mock para comentários
+export async function GET(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const postId = String(searchParams.get('postId') || '').trim();
+
+    if (!postId) {
+      return NextResponse.json(
+        { error: 'postId é obrigatório' },
+        { status: 400 }
+      );
+    }
+
+    const result = await getApprovedComments(postId);
+    if (result.errorMessage) {
+      return NextResponse.json({ error: result.errorMessage }, { status: 500 });
+    }
+
+    return NextResponse.json(result.data);
+  } catch {
+    return NextResponse.json(
+      { error: 'Erro ao buscar comentários' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { postId, name, email, content } = await request.json();
+    const body = await request.json();
+    const postId = String(body?.postId || '').trim();
+    const name = String(body?.name || '').trim();
+    const email = String(body?.email || '').trim().toLowerCase();
+    const content = String(body?.content || '').trim();
 
-    if (!name || !email || !content) {
+    if (!postId || !name || !email || !content) {
       return NextResponse.json(
         { error: 'Campos obrigatórios faltando' },
         { status: 400 }
       );
     }
 
-    // Aqui você integraria com Supabase
-    console.log('New comment:', { postId, name, email, content });
+    const result = await createComment({
+      post_id: postId,
+      name,
+      email,
+      content,
+    });
+
+    if (result.errorMessage) {
+      return NextResponse.json(
+        { error: result.errorMessage },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { message: 'Comentário enviado! Será revisado antes de publicar.' },
       { status: 200 }
     );
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Erro ao processar requisição' },
       { status: 500 }

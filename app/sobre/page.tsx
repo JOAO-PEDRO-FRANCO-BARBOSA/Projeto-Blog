@@ -49,9 +49,9 @@ export default function AboutPage() {
             Dúvidas, sugestões ou quer colaborar? Nos encontre nas redes:
           </p>
           <div className="flex gap-4 mt-6">
-            <a href="#" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Twitter</a>
-            <a href="#" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">LinkedIn</a>
-            <a href="mailto:contato@zentr1xa.com" className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">Email</a>
+            <a href="#" className="px-4 py-2 rounded bg-blue-600 text-white dark:text-white hover:bg-blue-700 dark:hover:bg-blue-800 transition">Twitter</a>
+            <a href="#" className="px-4 py-2 rounded bg-blue-600 text-white dark:text-white hover:bg-blue-700 dark:hover:bg-blue-800 transition">LinkedIn</a>
+            <a href="mailto:contato@zentr1xa.com" className="px-4 py-2 rounded bg-gray-700 text-white dark:text-white hover:bg-gray-800 dark:hover:bg-gray-600 transition">Email</a>
           </div>
         </div>
       </div>

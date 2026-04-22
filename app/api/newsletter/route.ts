@@ -1,26 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { subscribeNewsletter } from '@/lib/db';
 
-// Mock para newsletter (depois integrar com Supabase/Brevo)
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json();
+    const body = await request.json();
+    const email = String(body?.email || '').trim().toLowerCase();
 
-    if (!email || !email.includes('@')) {
+    if (!email || !email.includes('@') || email.length < 5) {
       return NextResponse.json(
         { error: 'Email inválido' },
         { status: 400 }
       );
     }
 
-    // Aqui você integraria com Supabase ou Brevo
-    // Por enquanto, apenas retorna sucesso
-    console.log('Newsletter signup:', email);
+    const result = await subscribeNewsletter(email);
+
+    if (result.errorMessage) {
+      return NextResponse.json(
+        { error: result.errorMessage },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { message: 'Email adicionado com sucesso!' },
       { status: 200 }
     );
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Erro ao processar requisição' },
       { status: 500 }
