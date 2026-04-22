@@ -49,7 +49,7 @@ export default function AboutPage() {
             Dúvidas, sugestões ou quer colaborar? Entre em contato por email:
           </p>
           <div className="mt-6 flex gap-4">
-            <a href="mailto:contato@zentr1xa.com" className="px-4 py-2 rounded bg-gray-700 text-white dark:text-white hover:bg-gray-800 dark:hover:bg-gray-600 transition">Email</a>
+            <a href="mailto:zentrixa512@gmail.com" className="px-4 py-2 rounded bg-gray-700 text-white dark:text-white hover:bg-gray-800 dark:hover:bg-gray-600 transition">Email</a>
           </div>
         </div>
       </div>
