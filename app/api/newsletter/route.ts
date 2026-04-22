@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { subscribeNewsletter } from '@/lib/db';
+import { supabaseClient } from '@/lib/db';
 
 type NewsletterResponse = {
   message?: string;
@@ -53,13 +53,17 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const result = await subscribeNewsletter(email);
+    const { error } = await supabaseClient
+      .from('newsletter_subscribers')
+      .insert([
+        {
+          email,
+          created_at: new Date().toISOString(),
+        },
+      ]);
 
-    if (result.errorMessage) {
-      console.error('Newsletter subscribe database error:', {
-        email,
-        errorMessage: result.errorMessage,
-      });
+    if (error) {
+      console.error('Newsletter subscribe database error:', error);
 
       const response: NewsletterResponse = {
         error: 'Não foi possível concluir sua inscrição agora. Tente novamente em instantes.',

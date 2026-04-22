@@ -55,10 +55,7 @@ export function NewsletterForm() {
       } else {
         setFeedback({
           type: 'error',
-          text:
-            response.status >= 500
-              ? 'Não foi possível concluir sua inscrição agora. Tente novamente em instantes.'
-              : payload.error || 'Não foi possível validar os dados enviados.',
+          text: payload.error || 'Não foi possível concluir sua inscrição agora. Tente novamente em instantes.',
         });
       }
     } catch {

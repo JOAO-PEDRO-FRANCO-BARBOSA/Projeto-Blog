@@ -11,6 +11,7 @@ export const ADMIN_ACCESS_TOKEN_COOKIE = 'zentr1xa-admin-access-token';
 export const ADMIN_REFRESH_TOKEN_COOKIE = 'zentr1xa-admin-refresh-token';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabaseClient = supabase;
 
 export function createSupabaseClientWithToken(accessToken?: string) {
   return createClient(supabaseUrl, supabaseAnonKey, {

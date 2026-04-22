@@ -34,7 +34,7 @@ export default function Layout({
           }}
         />
       </head>
-      <body className="bg-gray-950 text-gray-100">
+      <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
         <RootLayout>{children}</RootLayout>
       </body>
     </html>
