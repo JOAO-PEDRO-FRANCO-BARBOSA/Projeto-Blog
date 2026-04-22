@@ -20,7 +20,7 @@ export default function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="pt-BR" className="dark">
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-T3PSM5LKQ3" />
         <script
@@ -33,20 +33,8 @@ export default function Layout({
             `,
           }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Structural fix: remove manual toggle/localStorage and follow OS preference only.
-              if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.classList.add('dark');
-              } else {
-                document.documentElement.classList.remove('dark');
-              }
-            `,
-          }}
-        />
       </head>
-      <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
+      <body className="bg-gray-950 text-gray-100">
         <RootLayout>{children}</RootLayout>
       </body>
     </html>

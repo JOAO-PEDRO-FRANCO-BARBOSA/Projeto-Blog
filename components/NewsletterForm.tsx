@@ -55,7 +55,10 @@ export function NewsletterForm() {
       } else {
         setFeedback({
           type: 'error',
-          text: payload.error || `Erro ao adicionar email (status ${response.status}).`,
+          text:
+            response.status >= 500
+              ? 'Não foi possível concluir sua inscrição agora. Tente novamente em instantes.'
+              : payload.error || 'Não foi possível validar os dados enviados.',
         });
       }
     } catch {
@@ -82,7 +85,7 @@ export function NewsletterForm() {
             }
           }}
           required
-          className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 px-4 py-2 rounded-lg border border-gray-700 bg-gray-900 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           type="submit"
@@ -93,7 +96,7 @@ export function NewsletterForm() {
         </button>
       </div>
       {feedback && (
-        <p className={`text-sm ${feedback.type === 'success' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+        <p className={`text-sm ${feedback.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
           {feedback.text}
         </p>
       )}

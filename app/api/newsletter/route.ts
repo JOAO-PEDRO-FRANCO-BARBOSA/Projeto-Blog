@@ -7,6 +7,19 @@ type NewsletterResponse = {
 };
 
 export async function POST(request: NextRequest) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Newsletter API misconfiguration: missing Supabase environment variables.');
+
+    const response: NewsletterResponse = {
+      error: 'Não foi possível concluir sua inscrição agora. Tente novamente em instantes.',
+    };
+
+    return NextResponse.json(response, { status: 500 });
+  }
+
   let body: unknown;
 
   // Structural fix: invalid or empty JSON now returns 400 before reading fields.
@@ -43,8 +56,13 @@ export async function POST(request: NextRequest) {
     const result = await subscribeNewsletter(email);
 
     if (result.errorMessage) {
+      console.error('Newsletter subscribe database error:', {
+        email,
+        errorMessage: result.errorMessage,
+      });
+
       const response: NewsletterResponse = {
-        error: result.errorMessage,
+        error: 'Não foi possível concluir sua inscrição agora. Tente novamente em instantes.',
       };
 
       return NextResponse.json(response, { status: 500 });
@@ -55,9 +73,11 @@ export async function POST(request: NextRequest) {
     };
 
     return NextResponse.json(response, { status: 200 });
-  } catch {
+  } catch (error) {
+    console.error('Newsletter subscribe unexpected error:', error);
+
     const response: NewsletterResponse = {
-      error: 'Erro ao processar requisição',
+      error: 'Não foi possível concluir sua inscrição agora. Tente novamente em instantes.',
     };
 
     return NextResponse.json(response, { status: 500 });
