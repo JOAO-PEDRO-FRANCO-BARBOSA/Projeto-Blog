@@ -44,13 +44,11 @@ export default function AboutPage() {
             Através de Google AdSense e links de afiliados (sempre marcados). Nunca recomendamos algo que não usamos ou acreditamos. Você sempre tem a opção de usar um ad blocker — sem rancor 😊
           </p>
 
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-12 mb-6">Conecte-se conosco</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-12 mb-6">Fale conosco</h2>
           <p className="text-gray-700 dark:text-gray-300">
-            Dúvidas, sugestões ou quer colaborar? Nos encontre nas redes:
+            Dúvidas, sugestões ou quer colaborar? Entre em contato por email:
           </p>
-          <div className="flex gap-4 mt-6">
-            <a href="#" className="px-4 py-2 rounded bg-blue-600 text-white dark:text-white hover:bg-blue-700 dark:hover:bg-blue-800 transition">Twitter</a>
-            <a href="#" className="px-4 py-2 rounded bg-blue-600 text-white dark:text-white hover:bg-blue-700 dark:hover:bg-blue-800 transition">LinkedIn</a>
+          <div className="mt-6 flex gap-4">
             <a href="mailto:contato@zentr1xa.com" className="px-4 py-2 rounded bg-gray-700 text-white dark:text-white hover:bg-gray-800 dark:hover:bg-gray-600 transition">Email</a>
           </div>
         </div>

@@ -3,7 +3,6 @@ export const SEO_CONFIG = {
   siteUrl: 'https://zentr1xa.com',
   description: 'Conteúdo sobre IA, ferramentas digitais e produtividade para devs, criadores e empreendedores.',
   author: 'Zentrixa',
-  twitterHandle: '@zentr1xa',
   locale: 'pt-BR',
   logo: '/logo.svg',
 };
@@ -56,13 +55,6 @@ export function generateMetadata(
       type: 'website',
       locale: SEO_CONFIG.locale,
     },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      creator: SEO_CONFIG.twitterHandle,
-      images: [ogImage || `${SEO_CONFIG.siteUrl}/og-image.jpg`],
-    },
   };
 }
 
@@ -95,12 +87,6 @@ export function generateArticleMetadata(article: {
         publishedTime: article.publishedAt,
         authors: [article.author || SEO_CONFIG.author],
       },
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: article.title,
-      description: article.excerpt,
-      creator: SEO_CONFIG.twitterHandle,
     },
   };
 }

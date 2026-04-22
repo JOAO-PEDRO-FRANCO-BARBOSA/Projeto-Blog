@@ -53,18 +53,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Social */}
-          <div>
-            <h4 className="font-semibold mb-4 text-white">Siga-nos</h4>
-            <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                Twitter
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                LinkedIn
-              </a>
-            </div>
-          </div>
         </div>
 
         <div className="mt-8 border-t border-gray-800 pt-8">
