@@ -1,10 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getPostBySlug } from '@/lib/db';
 
 export async function GET(
+  request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    void request;
     const { slug } = await params;
 
     const result = await getPostBySlug(slug);
