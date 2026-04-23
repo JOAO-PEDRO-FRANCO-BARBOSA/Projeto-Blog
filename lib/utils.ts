@@ -26,24 +26,3 @@ export function slugify(text: string): string {
     .replace(/\s+/g, '-')
     .replace(/--+/g, '-');
 }
-
-export function formatRelativeDate(date: string | Date): string {
-  const d = new Date(date);
-  const now = new Date();
-  const diffMs = now.getTime() - d.getTime();
-  const diffSecs = Math.floor(diffMs / 1000);
-  const diffMins = Math.floor(diffSecs / 60);
-  const diffHours = Math.floor(diffMins / 60);
-  const diffDays = Math.floor(diffHours / 24);
-  const diffWeeks = Math.floor(diffDays / 7);
-  const diffMonths = Math.floor(diffDays / 30);
-  const diffYears = Math.floor(diffDays / 365);
-
-  if (diffSecs < 60) return 'agora';
-  if (diffMins < 60) return `há ${diffMins} minuto${diffMins > 1 ? 's' : ''}`;
-  if (diffHours < 24) return `há ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
-  if (diffDays < 7) return `há ${diffDays} dia${diffDays > 1 ? 's' : ''}`;
-  if (diffWeeks < 4) return `há ${diffWeeks} semana${diffWeeks > 1 ? 's' : ''}`;
-  if (diffMonths < 12) return `há ${diffMonths} mês${diffMonths > 1 ? 'es' : ''}`;
-  return `há ${diffYears} ano${diffYears > 1 ? 's' : ''}`;
-}

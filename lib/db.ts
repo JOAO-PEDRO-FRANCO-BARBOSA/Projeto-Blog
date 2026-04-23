@@ -331,49 +331,6 @@ export async function getApprovedComments(postId: string): Promise<DbResult<Comm
   }
 }
 
-export async function getApprovedCommentsBySlug(postSlug: string): Promise<DbResult<Comment[]>> {
-  try {
-    const { data: postData, error: postError } = await supabase
-      .from('posts')
-      .select('id')
-      .eq('slug', postSlug)
-      .single();
-
-    if (postError) {
-      throw postError;
-    }
-
-    if (!postData) {
-      return {
-        data: [],
-        errorMessage: null,
-      };
-    }
-
-    const { data, error } = await supabase
-      .from('comments')
-      .select('*')
-      .eq('post_id', postData.id)
-      .eq('approved', true)
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      throw error;
-    }
-
-    return {
-      data: (data || []) as Comment[],
-      errorMessage: null,
-    };
-  } catch (error) {
-    console.error('Error fetching comments by slug:', error);
-    return {
-      data: [],
-      errorMessage: 'Erro ao buscar comentários.',
-    };
-  }
-}
-
 export async function createComment(comment: {
   post_id: string;
   name: string;
@@ -402,60 +359,6 @@ export async function createComment(comment: {
     };
   } catch (error) {
     console.error('Error creating comment:', error);
-    return {
-      data: null,
-      errorMessage: 'Erro ao enviar comentário.',
-    };
-  }
-}
-
-export async function createCommentBySlug(comment: {
-  post_slug: string;
-  author_name: string;
-  content: string;
-}): Promise<DbResult<Comment | null>> {
-  try {
-    const { data: postData, error: postError } = await supabase
-      .from('posts')
-      .select('id')
-      .eq('slug', comment.post_slug)
-      .single();
-
-    if (postError) {
-      throw postError;
-    }
-
-    if (!postData) {
-      return {
-        data: null,
-        errorMessage: 'Post não encontrado.',
-      };
-    }
-
-    const { data, error } = await supabase
-      .from('comments')
-      .insert([
-        {
-          post_id: postData.id,
-          name: comment.author_name,
-          email: `guest-${Date.now()}@blog.local`,
-          content: comment.content,
-          approved: false,
-          created_at: new Date().toISOString(),
-        },
-      ])
-      .select();
-
-    if (error) {
-      throw error;
-    }
-
-    return {
-      data: (data?.[0] as Comment | undefined) ?? null,
-      errorMessage: null,
-    };
-  } catch (error) {
-    console.error('Error creating comment by slug:', error);
     return {
       data: null,
       errorMessage: 'Erro ao enviar comentário.',
