@@ -1,27 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createComment, getApprovedComments } from '@/lib/db';
+import { createCommentBySlug, getApprovedCommentsBySlug } from '@/lib/db';
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const postId = String(searchParams.get('postId') || '').trim();
+    const postSlug = String(searchParams.get('post_slug') || '').trim();
 
-    if (!postId) {
+    if (!postSlug) {
       return NextResponse.json(
-        { error: 'postId é obrigatório' },
+        { error: 'post_slug é obrigatório' },
         { status: 400 }
       );
     }
 
-    const result = await getApprovedComments(postId);
+    const result = await getApprovedCommentsBySlug(postSlug);
     if (result.errorMessage) {
-      return NextResponse.json({ error: result.errorMessage }, { status: 500 });
+      console.error('Database error fetching comments:', result.errorMessage);
+      return NextResponse.json(
+        { error: 'Erro ao buscar comentários. Tente novamente mais tarde.' },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json(result.data);
-  } catch {
+  } catch (error) {
+    console.error('Error in GET /api/comments:', error);
     return NextResponse.json(
-      { error: 'Erro ao buscar comentários' },
+      { error: 'Erro ao buscar comentários. Tente novamente mais tarde.' },
       { status: 500 }
     );
   }
@@ -30,28 +35,27 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const postId = String(body?.postId || '').trim();
-    const name = String(body?.name || '').trim();
-    const email = String(body?.email || '').trim().toLowerCase();
+    const postSlug = String(body?.post_slug || '').trim();
+    const authorName = String(body?.author_name || '').trim();
     const content = String(body?.content || '').trim();
 
-    if (!postId || !name || !email || !content) {
+    if (!postSlug || !authorName || !content) {
       return NextResponse.json(
         { error: 'Campos obrigatórios faltando' },
         { status: 400 }
       );
     }
 
-    const result = await createComment({
-      post_id: postId,
-      name,
-      email,
+    const result = await createCommentBySlug({
+      post_slug: postSlug,
+      author_name: authorName,
       content,
     });
 
     if (result.errorMessage) {
+      console.error('Database error creating comment:', result.errorMessage);
       return NextResponse.json(
-        { error: result.errorMessage },
+        { error: 'Erro ao enviar comentário. Tente novamente mais tarde.' },
         { status: 500 }
       );
     }
@@ -60,9 +64,10 @@ export async function POST(request: NextRequest) {
       { message: 'Comentário enviado! Será revisado antes de publicar.' },
       { status: 200 }
     );
-  } catch {
+  } catch (error) {
+    console.error('Error in POST /api/comments:', error);
     return NextResponse.json(
-      { error: 'Erro ao processar requisição' },
+      { error: 'Erro ao processar comentário. Tente novamente mais tarde.' },
       { status: 500 }
     );
   }

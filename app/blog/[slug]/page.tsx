@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArticleCard } from '@/components/ArticleCard';
-import { CommentsSection } from '@/components/CommentsSection';
+import { Comments } from '@/components/Comments';
 import { NewsletterForm } from '@/components/NewsletterForm';
 import { SafeImage } from '@/components/SafeImage';
 import { formatDate, readingTime } from '@/lib/utils';
-import { getApprovedComments, getPostBySlug, getRelatedPosts } from '@/lib/db';
+import { getPostBySlug, getRelatedPosts } from '@/lib/db';
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -21,13 +21,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const [relatedPostsResult, commentsResult] = await Promise.all([
-    getRelatedPosts(post, 3),
-    getApprovedComments(post.id),
-  ]);
-
+  const relatedPostsResult = await getRelatedPosts(post, 3);
   const relatedPosts = relatedPostsResult.data;
-  const comments = commentsResult.data;
 
   return (
     <article>
@@ -89,7 +84,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
       )}
 
-      <CommentsSection postId={post.id} initialComments={comments} />
+      <Comments postSlug={slug} />
     </article>
   );
 }
