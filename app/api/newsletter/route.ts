@@ -6,9 +6,16 @@ type NewsletterResponse = {
   error?: string;
 };
 
+type BrevoErrorResponse = {
+  code?: string;
+  message?: string;
+};
+
 export async function POST(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const brevoApiKey = process.env.BREVO_API_KEY;
+  const brevoListId = Number.parseInt(process.env.BREVO_LIST_ID ?? '', 10);
 
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('Newsletter API misconfiguration: missing Supabase environment variables.');
@@ -70,6 +77,48 @@ export async function POST(request: NextRequest) {
       };
 
       return NextResponse.json(response, { status: 500 });
+    }
+
+    if (brevoApiKey && Number.isInteger(brevoListId) && brevoListId > 0) {
+      try {
+        const brevoResponse = await fetch('https://api.brevo.com/v3/contacts', {
+          method: 'POST',
+          headers: {
+            'api-key': brevoApiKey,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            listIds: [brevoListId],
+          }),
+        });
+
+        if (!brevoResponse.ok) {
+          let brevoErrorBody: BrevoErrorResponse | null = null;
+
+          try {
+            brevoErrorBody = (await brevoResponse.json()) as BrevoErrorResponse;
+          } catch {
+            brevoErrorBody = null;
+          }
+
+          const brevoErrorText = `${brevoErrorBody?.code ?? ''} ${brevoErrorBody?.message ?? ''}`.toLowerCase();
+          const isContactAlreadyExists =
+            brevoResponse.status === 400 &&
+            /already exist|already exists|duplicate/.test(brevoErrorText);
+
+          if (!isContactAlreadyExists) {
+            console.error('Newsletter subscribe Brevo API error:', {
+              status: brevoResponse.status,
+              body: brevoErrorBody,
+            });
+          }
+        }
+      } catch (brevoError) {
+        console.error('Newsletter subscribe Brevo integration unexpected error:', brevoError);
+      }
+    } else {
+      console.error('Newsletter Brevo integration misconfiguration: missing BREVO_API_KEY or invalid BREVO_LIST_ID.');
     }
 
     const response: NewsletterResponse = {
