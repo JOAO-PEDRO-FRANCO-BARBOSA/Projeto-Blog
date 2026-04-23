@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const postId = String(body?.postId || '').trim();
+    const parentId = String(body?.parentId || '').trim();
     const name = String(body?.name || '').trim();
     const email = String(body?.email || '').trim().toLowerCase();
     const content = String(body?.content || '').trim();
@@ -44,6 +45,7 @@ export async function POST(request: NextRequest) {
 
     const result = await createComment({
       post_id: postId,
+      parent_id: parentId || null,
       name,
       email,
       content,
@@ -57,7 +59,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { message: 'Comentário enviado! Será revisado antes de publicar.' },
+      { message: 'Comentário publicado com sucesso.' },
       { status: 200 }
     );
   } catch {

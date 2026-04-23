@@ -39,7 +39,7 @@ export type Category = {
   updated_at: string | null; // timestamp
 };
 
-export type Post = {
+export interface Post {
   id: string; // UUID
   category_id: string | null; // UUID
   category: string | null;
@@ -55,18 +55,20 @@ export type Post = {
   views: number | null;
   keywords: string[] | null;
   read_time: number | null;
-};
+}
 
-export type Comment = {
+export interface Comment {
   id: string; // UUID
   post_id: string;
+  parent_id: string | null;
   name: string;
   email: string;
   content: string;
   approved: boolean;
+  is_approved: boolean;
   created_at: string; // timestamp
   updated_at: string | null; // timestamp
-};
+}
 
 export type NewsletterSubscriber = {
   id: string; // UUID
@@ -312,6 +314,7 @@ export async function getApprovedComments(postId: string): Promise<DbResult<Comm
       .select('*')
       .eq('post_id', postId)
       .eq('approved', true)
+      .eq('is_approved', true)
       .order('created_at', { ascending: false });
 
     if (error) {
@@ -333,6 +336,7 @@ export async function getApprovedComments(postId: string): Promise<DbResult<Comm
 
 export async function createComment(comment: {
   post_id: string;
+  parent_id?: string | null;
   name: string;
   email: string;
   content: string;
@@ -343,7 +347,9 @@ export async function createComment(comment: {
       .insert([
         {
           ...comment,
-          approved: false,
+          parent_id: comment.parent_id ?? null,
+          approved: true,
+          is_approved: true,
           created_at: new Date().toISOString(),
         },
       ])
