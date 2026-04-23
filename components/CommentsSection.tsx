@@ -190,7 +190,7 @@ export function CommentsSection({ postId, initialComments }: CommentsSectionProp
     }
   };
 
-  const renderComment = (comment: CommentNode, depth = 0): JSX.Element => {
+  const renderComment = (comment: CommentNode, depth = 0) => {
     const hasReplies = comment.replies.length > 0;
     const isReply = depth > 0;
 
