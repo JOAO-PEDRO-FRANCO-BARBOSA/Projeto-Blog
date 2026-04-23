@@ -3,42 +3,36 @@ export default function ToolsPage() {
     {
       name: 'ChatGPT',
       category: 'IA',
-      price: 'Free / $20',
       description: 'Modelo de linguagem conversacional para múltiplas tarefas',
       link: 'https://chat.openai.com',
     },
     {
       name: 'Claude',
       category: 'IA',
-      price: 'Free / $20',
       description: 'Excelente para textos longos e análise de documentos',
       link: 'https://claude.ai',
     },
     {
       name: 'Notion',
       category: 'Produtividade',
-      price: 'Free / $10+',
       description: 'Workspace tudo-em-um com IA integrada',
       link: 'https://notion.so',
     },
     {
       name: 'VS Code',
       category: 'Programação',
-      price: 'Grátis',
       description: 'O editor de código mais usado do mundo',
       link: 'https://code.visualstudio.com',
     },
     {
       name: 'Perplexity',
       category: 'IA',
-      price: 'Free / $20',
       description: 'Buscador com IA e fontes citadas',
       link: 'https://perplexity.ai',
     },
     {
       name: 'Canva',
       category: 'Design',
-      price: 'Free / $12',
       description: 'Design gráfico com IA integrada',
       link: 'https://canva.com',
     },
@@ -69,8 +63,7 @@ export default function ToolsPage() {
                 </span>
               </div>
               <p className="text-sm text-gray-400 mb-4">{tool.description}</p>
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-white">{tool.price}</span>
+              <div className="flex items-center justify-end">
                 <a
                   href={tool.link}
                   target="_blank"
