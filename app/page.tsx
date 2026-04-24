@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { ArticleCard } from '@/components/ArticleCard';
-import { NewsletterForm } from '@/components/NewsletterForm';
 import { getCategories, getPosts } from '@/lib/db';
 import { SafeImage } from '@/components/SafeImage';
 
@@ -99,20 +98,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Receba as melhores ferramentas e dicas na sua caixa de entrada
-            </h2>
-            <p className="text-blue-100 mb-8">
-              Sem spam, só conteúdo de qualidade. Desinscrever é fácil.
-            </p>
-            <NewsletterForm />
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
